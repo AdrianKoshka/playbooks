@@ -1,0 +1,26 @@
+---
+  - hosts: localhost
+
+    tasks:
+    - name: Add the flathub flatpak repository remote
+      flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        method: user
+
+    - name: Install the flatpaks
+      flatpak:
+        name: "{{ item }}"
+        state: present
+        method: user
+      loop:
+        - com.discordapp.Discord
+        - com.spotify.Client
+        - org.gnome.Boxes
+        - org.libreoffice.LibreOffice
+        - org.gnome.Builder
+        - org.flatpak.Builder
+        - org.keepassxc.KeePassXC
+        - org.gimp.GIMP
+        - org.kde.okular
